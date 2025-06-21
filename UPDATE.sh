@@ -11,6 +11,7 @@ git pull --recurse-submodules
 git rebase master
 cd modules/limboai
 git pull upstream support-godot-4-5
+git rebase support-godot-4-5
 cd ..
 cd ..
 git push --force
