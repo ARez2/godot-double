@@ -1,0 +1,4 @@
+[submodule "modules/limboai"]
+	path = modules/limboai
+	url = git@github.com:Rubonnek/limboai.git
+	branch = support-godot-4-5
