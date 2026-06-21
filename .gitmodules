@@ -1,0 +1,8 @@
+[submodule "modules/arez_bullets"]
+	path = modules/arez_bullets
+	url = git@github.com:ARez2/arez_bullets.git
+
+[submodule "modules/limboai"]
+	path = modules/limboai
+	url = git@github.com:limbonaut/limboai.git
+	branch = master
