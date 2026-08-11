@@ -1201,10 +1201,7 @@ Error SceneState::_parse_node(Node *p_owner, Node *p_node, int p_parent_idx, Has
 
 	for (int i = 0; i < p_node->get_child_count(); i++) {
 		Node *c = p_node->get_child(i);
-		Error err = _parse_node(p_owner, c, parent_node, name_map, variant_map, node_map, nodepath_map, ids_saved);
-		if (err) {
-			return err;
-		}
+		RETURN_IF_ERROR(_parse_node(p_owner, c, parent_node, name_map, variant_map, node_map, nodepath_map, ids_saved));
 	}
 
 	return OK;
@@ -1404,10 +1401,7 @@ Error SceneState::_parse_connections(Node *p_owner, Node *p_node, HashMap<String
 	// Recursively parse child connections.
 	for (int i = 0; i < p_node->get_child_count(); i++) {
 		Node *child = p_node->get_child(i);
-		Error err = _parse_connections(p_owner, child, name_map, variant_map, node_map, nodepath_map);
-		if (err) {
-			return err;
-		}
+		RETURN_IF_ERROR(_parse_connections(p_owner, child, name_map, variant_map, node_map, nodepath_map));
 	}
 
 	return OK;
@@ -1633,7 +1627,7 @@ Variant SceneState::get_property_value(int p_node, const StringName &p_property,
 		// Compatibility: In 4.5 and earlier, AnimationMixer used a single "libraries" Dictionary property.
 		// In 4.6+, each library is stored as a separate "libraries/<name>" property.
 		// If we're looking for "libraries/<name>" and didn't find it, check the old format.
-		String prop_str = p_property.operator String();
+		String prop_str = p_property.string();
 		if (prop_str.begins_with("libraries/")) {
 			StringName node_type = get_node_type(p_node);
 			if (node_type != StringName() && ClassDB::is_parent_class(node_type, SNAME("AnimationMixer"))) {

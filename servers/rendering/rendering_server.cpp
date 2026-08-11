@@ -1453,6 +1453,7 @@ Array RenderingServer::_get_array_from_surface(uint64_t p_format, Vector<uint8_t
 									Vector3 vec = Vector3(float(v[0]) / 65535.0, float(v[1]) / 65535.0, float(v[2]) / 65535.0);
 									w[j] = (vec * p_aabb.size) + p_aabb.position;
 								}
+								ret[i] = arr_3d;
 								continue;
 							}
 
@@ -2236,7 +2237,7 @@ void RenderingServer::get_argument_options(const StringName &p_function, int p_i
 		if (pf == "global_shader_parameter_set" || pf == "global_shader_parameter_set_override" ||
 				pf == "global_shader_parameter_get" || pf == "global_shader_parameter_get_type" || pf == "global_shader_parameter_remove") {
 			for (const StringName &E : global_shader_parameter_get_list()) {
-				r_options->push_back(E.operator String().quote());
+				r_options->push_back(E.string().quote());
 			}
 		} else if (pf == "has_os_feature") {
 			for (const String E : { "\"rgtc\"", "\"s3tc\"", "\"bptc\"", "\"etc\"", "\"etc2\"", "\"astc\"" }) {
